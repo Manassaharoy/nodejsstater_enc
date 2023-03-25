@@ -60,12 +60,13 @@ const commentHandler = tryCatchMiddleware(async (req, res, next) => {
     .skip(startIndex)
     .limit(limit)
     .select([])
-    .populate('movie_id', ['title', 'fullplot', 'year'])
+    // .populate('movie_id', ['title', 'fullplot'])
+    .populate('movie_id')
     .lean();
 
   const count = await comments.countDocuments({});
   const totalPages = Math.ceil(count / limit);
-  const prevPage = page - 1 < 1 ? 1 : page - 1;
+  const prevPage = page - 1 < 1 ? false : page - 1;
 
   return res.json({
     data: data,

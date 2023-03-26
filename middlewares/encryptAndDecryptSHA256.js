@@ -1,7 +1,7 @@
 const CryptoJS = require("crypto-js");
 
 // Define the encryption key and IV
-const keyString = "thisIsAverySpecialSecretKey";
+const keyString = "thisIsAverySpecialSecretKey00000";
 // const IV = "1583288699248111";
 
 // Convert the key and IV to CryptoJS format
@@ -15,13 +15,17 @@ function encryptionMiddleware(req, res, next) {
   // const requestBody = JSON.stringify(req.body);
   const requestBody = "test";
 
-  console.log("requestBody ---", requestBody);
-
+  
   const key = CryptoJS.SHA256(keyString);
-  const encrypted = CryptoJS.AES.encrypt(requestBody, key).toString();
-  console.log("encrypted ---", encrypted);
 
-  req.body = { data: encrypted };
+  // const encrypted = CryptoJS.AES.encrypt(requestBody, key).toString();
+  const encrypted = CryptoJS.AES.encrypt(requestBody, key, {
+    iv: CryptoJS.enc.Utf8.parse("1583288699248111"),
+    padding: CryptoJS.pad.Pkcs7,
+    mode: CryptoJS.mode.CBC,
+  });
+
+  req.body = encrypted.ciphertext.toString(CryptoJS.enc.Base64);
   console.log("req.body ---", req.body);
 
   res.send(req.body);

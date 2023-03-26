@@ -11,8 +11,8 @@ const connectToDatabase = require("./config/connection.js");
 
 //? Environment veriable initialization
 const dotenv = require("dotenv");
-// const { decryptionMiddleware, encryptionMiddleware } = require("./middlewares/encryptAndDecrypt.js");
-const { decryptionMiddleware, encryptionMiddleware } = require("./middlewares/encryptAndDecryptSHA256.js");
+const { decryptionMiddleware, encryptionMiddleware } = require("./middlewares/encryptAndDecrypt.js");
+// const { decryptionMiddleware, encryptionMiddleware } = require("./middlewares/encryptAndDecryptSHA256.js");
 dotenv.config();
 
 //? Database connection

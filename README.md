@@ -24,3 +24,14 @@ Start the server
   npm start
 ```
 
+# Colorful terminal codes
+
+```
+case 1: red
+case 2: green
+case 3: blue
+case 4: yellow 
+case 5: cyan 
+case 6: magenta
+default: white
+```

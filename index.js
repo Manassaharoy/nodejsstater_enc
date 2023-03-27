@@ -11,8 +11,12 @@ const connectToDatabase = require("./config/connection.js");
 
 //? Environment veriable initialization
 const dotenv = require("dotenv");
-const { decryptionMiddleware, encryptionMiddleware } = require("./middlewares/encryptAndDecrypt.js");
-// const { decryptionMiddleware, encryptionMiddleware } = require("./middlewares/encryptAndDecryptSHA256.js");
+// const { decryptionMiddleware, encryptionMiddleware } = require("./middlewares/encryptAndDecrypt.js");
+const {
+  decryptionMiddleware,
+  encryptionMiddleware,
+} = require("./middlewares/encryptAndDecryptSHA256.js");
+const { checkDecryption, checkEncryption } = require("./utils/encryptionsCheck.js");
 dotenv.config();
 
 //? Database connection
@@ -28,12 +32,8 @@ app.use(decryptionMiddleware);
 //? API points
 app.use("/", firstRoute);
 
-
 app.post("/test", (req, res, next) => {
-  console.log("Do all necessary things")
-  req.body = {
-    data:"updated"
-  }
+
   next();
 });
 

@@ -17,6 +17,7 @@ const { decryptionMiddleware, encryptionMiddleware } = require("./middlewares/en
 //   encryptionMiddleware,
 // } = require("./middlewares/encryptAndDecryptSHA256.js");
 const { checkDecryption, checkEncryption } = require("./utils/encryptionsCheck.js");
+const { coloredLog } = require("./utils/coloredLog.js");
 dotenv.config();
 
 //? Database connection
@@ -32,8 +33,8 @@ app.use(decryptionMiddleware);
 //? API points
 app.use("/", firstRoute);
 
-app.post("/test", (req, res, next) => {
-
+app.get("/test", (req, res, next) => {
+  coloredLog(req.method, 3)
   next();
 });
 

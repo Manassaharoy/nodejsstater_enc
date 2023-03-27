@@ -32,10 +32,17 @@ const checkEncryption = (message) => {
   if (!message) msg = "hello";
   else msg = message;
 
-  coloredLog(["Encryption started of message", JSON.stringify(msg), " type ", typeof msg], 4);
+  coloredLog(
+    [
+      "Encryption started of message",
+      JSON.stringify(msg),
+      " type ",
+      typeof msg,
+    ],
+    4
+  );
 
-  const requestBody =
-    typeof msg === "object" ? JSON.stringify(msg) : msg;
+  const requestBody = typeof msg === "object" ? JSON.stringify(msg) : msg;
 
   const encrypted = CryptoJS.AES.encrypt(requestBody, key, {
     iv: CryptoJS.enc.Utf8.parse(IV),

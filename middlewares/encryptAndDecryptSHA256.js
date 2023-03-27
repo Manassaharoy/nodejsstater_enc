@@ -44,7 +44,7 @@ function encryptionMiddleware(req, res, next) {
   coloredLog(["Encrypted Data = ", req.body], 1);
 
   res.json({
-    decryptedData: typeof req.body === "string" ? JSON.parse(req.body) : req.body,
+    decryptedData: typeof(req.body) === "string" ? JSON.parse(req.body) : req.body,
     encryptedData: encryptedData,
   });
 }

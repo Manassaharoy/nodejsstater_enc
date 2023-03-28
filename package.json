@@ -1,14 +1,36 @@
 {
   "name": "startercodenodejs",
   "version": "1.0.0",
-  "description": "A starter code template for node and express",
+  "description": "A starter code template for Node.js and Express with encryption, error handling, and response middleware.",
   "main": "index.js",
   "type": "commonjs",
   "scripts": {
     "test": "nodemon index.js",
     "start": "node index.js"
   },
-  "author": "manas roy",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Manassaharoy/nodejsstater.git"
+  },
+  "keywords": [
+    "node",
+    "express",
+    "starter code",
+    "template",
+    "encryption",
+    "error handling",
+    "middleware"
+  ],
+  "homepage": "https://github.com/Manassaharoy/nodejsstater#readme",
+  "engines": {
+    "node": ">=12.0.0",
+    "npm": ">=6.0.0"
+  },
+  "author": {
+    "name": "Manas Roy",
+    "email": "triptoroy5@gmail.com",
+    "linkedin": "https://www.linkedin.com/in/manassaharoy/"
+  },
   "license": "ISC",
   "dependencies": {
     "chalk": "^4.1.2",

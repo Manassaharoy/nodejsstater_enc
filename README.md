@@ -10,6 +10,7 @@ A code template to get quick started with node js, express js and mongodb. It ha
 - response middleware to make the response sending structure same for all api point.
 - error handling middleware with enum HTTP error codes
 - monitor app by visiting url: /status
+- a colorful console log function
 
 
 ### Encryption type:

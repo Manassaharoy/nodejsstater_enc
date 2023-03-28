@@ -1,5 +1,6 @@
 const CryptoJS = require("crypto-js");
 const { coloredLog } = require("../utils/coloredLog");
+const dotenv = require("dotenv").config();
 
 // Define the encryption key and IV
 const keyString = process.env.KEY_STRING || "thisIsAverySpecialSecretKey00000";
@@ -40,6 +41,7 @@ const decryptionMiddleware = (req, res, next) => {
     }
     next();
   } else {
+    coloredLog("Decryption is off", 5)
     next();
   }
 };
@@ -51,12 +53,9 @@ function encryptionMiddleware(req, res, next) {
       ["Encryption started", "type of", typeof req.body, `${req.body}`],
       1
     );
+
     // Get the request body as a string
     let requestBody = req.body;
-
-    // let requestBody;
-    // if (typeof req.body === "string") requestBody = JSON.parse(req.body);
-    // else requestBody = req.body;
 
     // Encrypt the request body using AES encryption
     const encrypted = CryptoJS.AES.encrypt(requestBody, key, {
@@ -73,18 +72,13 @@ function encryptionMiddleware(req, res, next) {
 
     coloredLog(["encrypted data: ", encryptedData], 1);
 
-    // if (typeof encryptedData === "string") {
-    //   encryptedData = JSON.parse(encryptedData);
-    // }
-
-    res.json({
-      decryptedData: requestBody,
-      encryptedData: encryptedData,
-    });
+    req.locals = { myData: encryptedData };
+    next();
   } else {
-    res.json({
-      data: req.body.data,
-    });
+    coloredLog("Encryption is off", 5)
+    req.locals = { myData: req.body };
+
+    next();
   }
 }
 

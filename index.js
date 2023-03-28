@@ -11,13 +11,20 @@ const connectToDatabase = require("./config/connection.js");
 
 //? Environment veriable initialization
 const dotenv = require("dotenv");
-const { decryptionMiddleware, encryptionMiddleware } = require("./middlewares/encryptAndDecrypt.js");
+const {
+  decryptionMiddleware,
+  encryptionMiddleware,
+} = require("./middlewares/encryptAndDecrypt.js");
 // const {
 //   decryptionMiddleware,
 //   encryptionMiddleware,
 // } = require("./middlewares/encryptAndDecryptSHA256.js");
-const { checkDecryption, checkEncryption } = require("./utils/encryptionsCheck.js");
+const {
+  checkDecryption,
+  checkEncryption,
+} = require("./utils/encryptionsCheck.js");
 const { coloredLog } = require("./utils/coloredLog.js");
+const { responseMiddleware } = require("./middlewares/sendResponse.js");
 dotenv.config();
 
 //? Database connection
@@ -34,11 +41,16 @@ app.use(decryptionMiddleware);
 app.use("/", firstRoute);
 
 app.get("/test", (req, res, next) => {
-  coloredLog(req.method, 3)
+  coloredLog(req.method, 3);
+  next();
+});
+app.post("/test", (req, res, next) => {
+  coloredLog(req.method, 3);
   next();
 });
 
 app.use(encryptionMiddleware);
+app.use(responseMiddleware);
 app.use(errorMiddleware);
 
 //? Starting server
